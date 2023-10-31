@@ -23,6 +23,7 @@ const products = [
   },
 ];
 const cart = [];
+
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
    - name: name of product (string)
@@ -112,9 +113,24 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+// Initialize balance to the total cart value
+
+let remainingBalance;
+
 function pay(amount) {
-  const total = cartTotal();
-  return amount - total;
+  if (typeof remainingBalance === 'undefined') {
+    remainingBalance = cartTotal();
+  }
+
+  remainingBalance -= amount;
+
+  if (remainingBalance <= 0) {
+    const change = Math.abs(remainingBalance);
+    remainingBalance = 0;
+    return change;
+  } else {
+    return -remainingBalance;
+  }
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
