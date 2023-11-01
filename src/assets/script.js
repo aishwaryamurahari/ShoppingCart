@@ -48,8 +48,13 @@ const cart = [];
 */
 function addProductToCart(productId) {
   const product = products.find((p) => p.productId === productId);
-  if (!product) return;
-  cart.push(product);
+  const cartItem = cart.find((p) => p.productId === productId);
+  if (cartItem) {
+    cartItem.quantity += 1;
+  } else {
+    const newcartItem = { ...product, quantity: 1 };
+    cart.push(newcartItem);
+  }
 }
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
